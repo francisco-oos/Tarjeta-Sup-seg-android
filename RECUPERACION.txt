@@ -1,0 +1,15 @@
+JKS: supervision_segura.jks
+
+Alias:
+supervisionsegura
+
+Ubicación respaldo:
+USB
+OneDrive
+PC principal
+
+https://drive.google.com/file/d/1l__T_7WCN9MSqS6XMxNF-ZN832KBAAaV/view?usp=drive_link
+
+IMPORTANTE:
+No perder este archivo.
+Sin él no se podrán publicar actualizaciones compatibles.

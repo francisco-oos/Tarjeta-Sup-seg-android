@@ -1,0 +1,22 @@
+# Android / Gradle
+.gradle/
+build/
+app/build/
+
+# Android Studio
+.idea/
+*.iml
+
+# Local config
+local.properties
+
+# APK / release outputs
+*.apk
+*.aab
+
+# Keystore - NO subir jamás
+*.jks
+*.keystore
+
+# Logs
+*.log
