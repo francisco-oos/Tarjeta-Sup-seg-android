@@ -7,8 +7,9 @@ app/build/
 .idea/
 *.iml
 
-# Local config
+# Local config / secrets
 local.properties
+supervision-secrets.properties
 
 # APK / release outputs
 *.apk
