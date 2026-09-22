@@ -1,6 +1,25 @@
+import java.util.Properties
+
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+}
+
+def localSecrets = new Properties()
+def secretsFile = rootProject.file('supervision-secrets.properties')
+if (secretsFile.exists()) {
+    secretsFile.withInputStream { localSecrets.load(it) }
+}
+
+def readLocalValue = { String key, String fallback ->
+    def envValue = System.getenv(key)?.trim()
+    if (envValue) return envValue
+    def localValue = localSecrets.getProperty(key, fallback)?.trim()
+    return localValue ?: fallback
+}
+
+def quoted = { String value ->
+    '"' + value.replace('\\', '\\\\').replace('"', '\\"') + '"'
 }
 
 android {
@@ -18,7 +37,13 @@ android {
         versionCode 2
         versionName '1.0.1'
 
-        buildConfigField "String", "DATA_KEY", "\"CAMBIA_ESTA_CLAVE_SUPERVISION_SEGURA_V1\""
+        // La clave real vive fuera de Git: variable de entorno o
+        // supervision-secrets.properties (ignorado por Git).
+        buildConfigField "String", "DATA_KEY",
+                quoted(readLocalValue(
+                        "SUPERVISION_SEGURA_DATA_KEY",
+                        "CHANGE_ME_SUPERVISION_SEGURA_DATA_KEY"
+                ))
         buildConfigField "String", "LOCAL_EXPIRES_AT", "\"2026-07-30\""
         buildConfigField "String", "VERSION_CONTROL_URL", "\"\""
     }
